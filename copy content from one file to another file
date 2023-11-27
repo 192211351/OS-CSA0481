@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	FILE *fptr1=null,*fptr2=null;
+	char c,filename;
+	printf("enter the file name\n");
+	scanf("%s",filename);
+	fptr1=fopen(filename,"r");
+	if(fptr1==null)
+	{
+	printf("no file");
+	exit(1);	
+	}
+	printf("enter the file name for writing\n");
+	scanf("%s",filename);
+	fptr2=fopen(filename,"w");
+	if(fptr2==null)
+	{
+		printf("no file");
+		exit(1);
+	}
+	while((c=fgetc(fptr1))!=EOF)
+	{
+		fputc(c=(ptr2));
+	}
+	fclose(fptr1);
+	fclose(fptr2);
+	printf("copied succesfully");
+	return 0;
+}
