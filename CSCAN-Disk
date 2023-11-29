@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+void cscan(int arr[], int head, int size) {
+    int distance = 0;
+    int current = head;
+    int currentPosition;
+    int seekSequence[size + 1];
+    int temp[size];
+    for (int i = 0; i < size; i++) {
+        temp[i] = arr[i];
+    }
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (temp[i] > temp[j]) {
+                int t = temp[i];
+                temp[i] = temp[j];
+                temp[j] = t;
+            }
+        }
+    }
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == head) {
+            currentPosition = i;
+            break;
+        }
+    }
+    for (int i = currentPosition; i < size; i++) {
+        seekSequence[i - currentPosition] = temp[i];
+    }
+    for (int i = 0; i < currentPosition; i++) {
+        seekSequence[size - currentPosition + i] = temp[i];
+    }
+    for (int i = 0; i < size; i++) {
+        distance += abs(current - seekSequence[i]);
+        current = seekSequence[i];
+    }
+    printf("Seek Sequence: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", seekSequence[i]);
+    }
+    printf("\nTotal Seek Distance: %d\n", distance);
+}
+
+int main() {
+    int size, head;
+    printf("Enter the size of the request array: ");
+    scanf("%d", &size);
+
+    int arr[size];
+    printf("Enter the request array:\n");
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the initial position of the head: ");
+    scanf("%d", &head);
+    cscan(arr, head, size);
+
+    return 0;
+}
